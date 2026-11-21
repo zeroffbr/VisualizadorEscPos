@@ -21,6 +21,9 @@ namespace VisualizadorEscPos
         int sobMouse = -1;
         bool sobreX;
         string dicaAtual;
+        Aba arrastada;
+        Point inicioArraste;
+        bool arrastando;
 
         public event EventHandler SelecaoMudou;
         public event Action<Aba> PedirFechar;
@@ -201,6 +204,21 @@ namespace VisualizadorEscPos
         protected override void OnMouseMove(MouseEventArgs e)
         {
             base.OnMouseMove(e);
+            if (arrastada != null && e.Button == MouseButtons.Left)
+            {
+                if (!arrastando && Math.Abs(e.X - inicioArraste.X) > 5)
+                {
+                    arrastando = true;
+                    Cursor = Cursors.SizeWE;
+                    dica.SetToolTip(this, null);
+                    dicaAtual = null;
+                }
+                if (arrastando)
+                {
+                    Arrastar(e.X);
+                    return;
+                }
+            }
             int indice = Indice(e.Location);
             bool x = indice >= 0 && RetanguloX(retangulos[indice]).Contains(e.Location);
             if (indice != sobMouse || x != sobreX)
@@ -215,6 +233,41 @@ namespace VisualizadorEscPos
                 dicaAtual = texto;
                 dica.SetToolTip(this, texto);
             }
+        }
+
+        void Arrastar(int x)
+        {
+            int atual = Abas.IndexOf(arrastada);
+            if (atual < 0 || retangulos.Count != Abas.Count)
+                return;
+            int destino = 0;
+            for (int i = 0; i < retangulos.Count; i++)
+            {
+                if (i == atual)
+                    continue;
+                Rectangle r = retangulos[i];
+                if (x > r.Left + r.Width / 2)
+                    destino++;
+            }
+            if (destino == atual)
+                return;
+            Aba selecionadaAntes = Selecionada;
+            Abas.RemoveAt(atual);
+            Abas.Insert(destino, arrastada);
+            selecionada = Abas.IndexOf(selecionadaAntes);
+            sobMouse = destino;
+            sobreX = false;
+            Refresh();
+        }
+
+        void TerminarArraste()
+        {
+            arrastada = null;
+            if (!arrastando)
+                return;
+            arrastando = false;
+            Cursor = Cursors.Default;
+            Invalidate();
         }
 
         protected override void OnMouseLeave(EventArgs e)
@@ -232,12 +285,20 @@ namespace VisualizadorEscPos
             if (indice < 0 || e.Button != MouseButtons.Left)
                 return;
             if (!RetanguloX(retangulos[indice]).Contains(e.Location))
+            {
                 Selecionada = Abas[indice];
+                arrastada = Abas[indice];
+                inicioArraste = e.Location;
+            }
         }
 
         protected override void OnMouseUp(MouseEventArgs e)
         {
             base.OnMouseUp(e);
+            bool eraArraste = arrastando;
+            TerminarArraste();
+            if (eraArraste)
+                return;
             int indice = Indice(e.Location);
             if (indice < 0 || PedirFechar == null)
                 return;

@@ -6,7 +6,7 @@ Mostra na tela como uma impressora térmica imprimiria um arquivo com comandos E
 
 - Abra `bin\VisualizadorEscPos.exe` e clique em **Abrir arquivo...** (ou Ctrl+O), ou arraste os arquivos para dentro da janela.
 - Também dá para soltar os arquivos em cima do `.exe`, ou usar **Abrir com** no Windows.
-- Cada arquivo abre na sua aba. Para fechar uma aba, use o **X** dela, o botão do meio do mouse ou Ctrl+W; Ctrl+Tab troca de aba. Uma bolinha verde marca a aba que recebeu impressão nova.
+- Cada arquivo abre na sua aba. Para fechar uma aba, use o **X** dela, o botão do meio do mouse ou Ctrl+W; Ctrl+Tab troca de aba. Arraste uma aba para mudar a ordem. Uma bolinha verde marca a aba que recebeu impressão nova.
 - **Modelo**: escolha o mesmo modelo configurado na impressora do Lógica. EPSON e DIEBOLD usam *Epson e compatíveis*; BEMATECH, ELGIN e DARUMA têm opção própria. TEXTO é texto puro e aparece certo em qualquer modelo. NENHUM não gera arquivo.
 - **Atualizar sozinho** (ligado por padrão): a cada nova impressão o ACBr regrava o arquivo e a tela recarrega.
 - **F5** recarrega na hora. Modelo, colunas, zoom e *Atualizar sozinho* valem para a aba aberta.
@@ -19,7 +19,7 @@ Mostra na tela como uma impressora térmica imprimiria um arquivo com comandos E
 
 O botão **Rede** abre uma aba que funciona como uma impressora térmica de rede, sem precisar de arquivo.
 
-1. Clique em **Rede**. Ela começa a receber em `127.0.0.1:9100`.
+1. Clique em **Rede** para abrir a aba e depois em **Ligar**. Ela começa a receber em `127.0.0.1:9100`.
 2. No Lógica, coloque na porta da impressora `TCP:127.0.0.1:9100`. O botão **Copiar** da aba copia esse texto.
 3. Cada impressão aparece na lista da esquerda, com a mais nova em cima e já selecionada. Clique numa anterior para rever.
 
@@ -27,7 +27,7 @@ O botão **Rede** abre uma aba que funciona como uma impressora térmica de rede
 - Pedidos de status da Epson (`DLE EOT`) recebem a resposta "impressora pronta".
 - **Aceitar de outros computadores** recebe impressões vindas de outra máquina da rede. O Windows pode pedir liberação no firewall.
 - Clique com o botão direito numa impressão para salvá-la como `.prn` ou apagá-la, ou para limpar o histórico. A tecla Delete também apaga.
-- A porta e se a rede estava ligada ficam guardadas em `%APPDATA%\VisualizadorEscPos\config.ini`. Se estava ligada, ela volta ligada ao abrir o programa.
+- O programa lembra como a impressora de rede estava ao ser fechado: se estava ligada, volta ligada; se estava desligada, ou com a aba fechada, abre sem ela. O botão **Rede** só abre a aba, sem ligar. A porta, a opção de aceitar outros computadores e esse estado ficam guardados em `%APPDATA%\VisualizadorEscPos\config.ini`.
 - Fechar a aba desliga a impressora de rede.
 
 ## Linha de comando

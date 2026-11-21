@@ -51,7 +51,7 @@ namespace VisualizadorEscPos
             Botao(botaoComandos, '\uE8FD', "Ver cada comando com a posição, os bytes e o significado");
 
             botaoAbrir.Click += delegate { EscolherArquivo(); };
-            botaoRede.Click += delegate { AbrirRede(true); };
+            botaoRede.Click += delegate { AbrirRede(false); };
             botaoRecarregar.Click += delegate { if (Ativa != null) Ativa.Carregar(); };
             botaoImagem.Click += delegate { SalvarImagem(); };
             botaoAcompanhar.CheckOnClick = true;
@@ -146,7 +146,7 @@ namespace VisualizadorEscPos
             }
 
             Sincronizar();
-            if (Config.Logico("redeLigada", false) && arquivosIniciais != null && arquivosIniciais.Length == 0)
+            if (arquivosIniciais != null && Config.Logico("redeLigada", false))
                 AbrirRede(true);
             if (arquivosIniciais != null)
                 foreach (string a in arquivosIniciais)

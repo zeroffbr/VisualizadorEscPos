@@ -1,6 +1,6 @@
 # Visualizador ESC/POS
 
-Mostra na tela como uma impressora térmica imprimiria um arquivo com comandos ESC/POS, como o arquivo gerado pelo ACBr quando a porta da impressora é um caminho de arquivo (por exemplo `D:\Fontes\cozinha.prn`).
+Mostra na tela como uma impressora térmica imprimiria um arquivo com comandos ESC/POS, como o arquivo gerado pelo ACBr quando a porta da impressora é um caminho de arquivo (por exemplo `C:\impressao.prn`).
 
 ## Como usar
 

@@ -20,7 +20,7 @@ Mostra na tela como uma impressora térmica imprimiria um arquivo com comandos E
 O botão **Rede** abre uma aba que funciona como uma impressora térmica de rede, sem precisar de arquivo.
 
 1. Clique em **Rede** para abrir a aba e depois em **Ligar**. Ela começa a receber em `127.0.0.1:9100`.
-2. No Lógica, coloque na porta da impressora `TCP:127.0.0.1:9100`. O botão **Copiar** da aba copia esse texto.
+2. Coloque na porta da impressora `TCP:127.0.0.1:9100`. O botão **Copiar** da aba copia esse texto.
 3. Cada impressão aparece na lista da esquerda, com a mais nova em cima e já selecionada. Clique numa anterior para rever.
 
 - Uma impressão termina quando a conexão fecha ou quando ela fica 0,7 s sem receber dados. Assim, cada impressão fica separada mesmo se o ACBr deixar a porta aberta.
